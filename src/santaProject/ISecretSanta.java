@@ -1,7 +1,5 @@
 package santaProject;
 
-import java.util.ArrayList;
-
 /**
  * @author ASHISH KARKI_
  * 
@@ -11,12 +9,17 @@ import java.util.ArrayList;
 public interface ISecretSanta {
 
 	/**
+	 * Set of people participating in this draw.
+	 */
+	final String[] participants = new String[] { "Kyle", "Kenny", "Eric",
+			"Stan", "Stewie", "Brian" };
+
+	/**
 	 * @param participants
 	 *            people participating in the Secret Santa Draw.
 	 * @return list of giftees, here called assignments. Each assignment is
 	 *         matched with their participant in corresponding list index.
 	 */
-	public ArrayList<String> generateAssignments(
-			final ArrayList<String> participants);
+	public String[] generateAssignments(final String participants);
 
 }
