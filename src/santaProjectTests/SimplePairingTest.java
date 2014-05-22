@@ -1,9 +1,11 @@
 package santaProjectTests;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,15 +40,18 @@ public class SimplePairingTest {
 	 * Test if no participant and his/her assignee are the same.
 	 */
 	@Test
-	public void testGenerateAssignments() {
+	public void testParticipantVsAssignee() {
 
 		final String[] assignments = simplePairing
 				.generateAssignments(participants);
-
-		for (int i = 0; i < participants.length; i++) {
-			assertFalse("The participant must be different than assignee.",
-					participants[i].equals(assignments[i]));
-		}
+		printArray(assignments);
+		/*
+		 * for (int i = 0; i < participants.length; i++) {
+		 * assertFalse("The participant must be different than assignee.",
+		 * participants[i].equals(assignments[i])); }
+		 */
+		assertThat("The participant must be different than assignee.",
+				participants, not(assignments));
 	}
 
 	/**
@@ -57,14 +62,19 @@ public class SimplePairingTest {
 	public void testShiftLeftNRight() {
 		final String[] assignments = simplePairing
 				.generateAssignments(participants);
-
+		printArray(assignments);
+		
 		// Shift the whole participants array to its left and check
-		String[] leftRotatedAssignments = rotateLeft(assignments.clone());
+		String[] leftRotatedAssignments = rotateLeft(participants.clone());
 
-		for (int i = 0; i < participants.length; i++) {
-			assertFalse("The participant must be different than assignee.",
-					participants[i].equals(leftRotatedAssignments[i]));
-		}
+		assertThat("Shiting names left is not acceptable solution.",
+				assignments, not(leftRotatedAssignments));
+
+		// Shift the whole participants array to its right and check
+		String[] rightRotatedAssignments = rotateRight(participants.clone());
+
+		assertThat("Shiting names right is not acceptable solution.",
+				assignments, not(rightRotatedAssignments));
 	}
 
 	/**
@@ -74,12 +84,33 @@ public class SimplePairingTest {
 	public String[] rotateLeft(String[] arrayToRotateLeft) {
 		String firstElem = arrayToRotateLeft[0];
 
-		for (int i = 0; i < arrayToRotateLeft.length; i++) {
+		for (int i = 0; i < arrayToRotateLeft.length - 2; i++) {
 			arrayToRotateLeft[i] = arrayToRotateLeft[i + 1];
 		}
-		arrayToRotateLeft[arrayToRotateLeft.length] = firstElem;
+		arrayToRotateLeft[arrayToRotateLeft.length - 1] = firstElem;
 
 		return arrayToRotateLeft;
 	}
 
+	/**
+	 * @param arrayToRotateRight
+	 * @return array that is rotated (each element shifted) right
+	 */
+	public String[] rotateRight(String[] arrayToRotateRight) {
+		String lastElem = arrayToRotateRight[arrayToRotateRight.length - 1];
+
+		for (int i = 0; i < arrayToRotateRight.length - 2; i++) {
+			arrayToRotateRight[i + 1] = arrayToRotateRight[i];
+		}
+		arrayToRotateRight[0] = lastElem;
+
+		return arrayToRotateRight;
+	}
+
+	public static void printArray(String[] array) {
+		System.out.println("The resulting assignment is:");
+		for (String element : array) {
+			System.out.print(element + ", ");
+		}
+	}
 }
