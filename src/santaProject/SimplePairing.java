@@ -1,5 +1,7 @@
 package santaProject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -23,9 +25,9 @@ public class SimplePairing implements ISecretSanta {
 	}
 
 	@Override
-	public String[] generateAssignments(String participants) {
+	public String[] generateAssignments(String[] participants) {
 		// number of participants
-		int n = participants.length();
+		int n = participants.length;
 		// our assignments
 		String[] assignments = new String[n];
 		// giftee/assignment index generated from each random generation cycle
@@ -34,24 +36,28 @@ public class SimplePairing implements ISecretSanta {
 		int left = -1;
 		// Index of the participant to the right of current participant
 		int right = -1;
+		List<Integer> alreadyPaired = new ArrayList<Integer>();
 
 		for (int i = 0; i < n; i++) {
-			gifteeIndex = randomNoGenerator.nextInt(n);
+			// gifteeIndex = randomNoGenerator.nextInt(n);
 
 			// Check for LOGICAL_ERROR conditions
 			// 1. A person is not assigned to him/herself
 			// 2. Check the assignee is not simply the participant to left/right
+			// 3. The participants and their assignees are unique pair
 			left = (i == 0) ? n - 1 : i - 1;
 			right = (i == n - 1) ? 0 : i + 1;
-			if (gifteeIndex == i || gifteeIndex == left || gifteeIndex == right) {
+			// if (gifteeIndex == i || gifteeIndex == left || gifteeIndex ==
+			// right) {
+			do {
 				gifteeIndex = randomNoGenerator.nextInt(n);
-			}
+			} while (gifteeIndex == i || alreadyPaired.contains(gifteeIndex));
 
 			// assignments
-			assignments[i] = ISecretSanta.participants[gifteeIndex];
+			alreadyPaired.add(gifteeIndex);
+			assignments[i] = participants[gifteeIndex];
 		}
 
 		return assignments;
 	}
-
 }
