@@ -32,10 +32,7 @@ public class SimplePairing implements ISecretSanta {
 		String[] assignments = new String[n];
 		// giftee/assignment index generated from each random generation cycle
 		int gifteeIndex = 0;
-		// Index of the participant to the left of current participant
-		int left = -1;
-		// Index of the participant to the right of current participant
-		int right = -1;
+		// The index of giftees who are already matched/paired
 		List<Integer> alreadyPaired = new ArrayList<Integer>();
 
 		for (int i = 0; i < n; i++) {
@@ -43,12 +40,8 @@ public class SimplePairing implements ISecretSanta {
 
 			// Check for LOGICAL_ERROR conditions
 			// 1. A person is not assigned to him/herself
-			// 2. Check the assignee is not simply the participant to left/right
-			// 3. The participants and their assignees are unique pair
-			left = (i == 0) ? n - 1 : i - 1;
-			right = (i == n - 1) ? 0 : i + 1;
-			// if (gifteeIndex == i || gifteeIndex == left || gifteeIndex ==
-			// right) {
+			// 2. The participants and their assignees are unique pair
+			
 			do {
 				gifteeIndex = randomNoGenerator.nextInt(n);
 			} while (gifteeIndex == i || alreadyPaired.contains(gifteeIndex));
