@@ -8,7 +8,7 @@ Implementation
 2. Class "SimplePairing" uses Random class from Java to randomly choose an assignment/assignee/giftee for a particular participant. 
 3. Class "ShufflePairing" uses Collection.shuffle() to shuffle assignmentsList. AssignmentsList is simply a ArrayList copy of participants array.
 4. Both implementations also ensures that: 
-    + No participant same as his/her assignee.  
+    + No participant is same as his/her assignee.  
     + The participants and their assignees are unique. 
     + It also logically follows that all the assignments are from the list of passed participants.
 5. A factory class called "SecretSantaFactory" is also defined. This class has a static factory method that is responsible for creating and returning one of the Secret Santa concrete classes. Using such design has the advantage of choosing any specific implementation as per requirement. The JUnit test class also utilizes this factory method to test the current implementation.
