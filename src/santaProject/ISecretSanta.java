@@ -3,7 +3,7 @@ package santaProject;
 /**
  * @author ASHISH KARKI_
  * 
- * @Description All Pairing (of secret santa) implement this skeleton
+ * @Description All Pairing (of secret santa) implement this skeleton/blueprint
  * 
  */
 public interface ISecretSanta {

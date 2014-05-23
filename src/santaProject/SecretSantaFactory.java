@@ -9,11 +9,9 @@ package santaProject;
  */
 public class SecretSantaFactory {
 
-	public SecretSantaFactory() {
-		// TODO Auto-generated constructor stub
-	}
-
+	// Can call any one of the Implementations
 	public static ISecretSanta getSecretSantaImplementation() {
-		return new SimplePairing();
+		// return new SimplePairing();
+		return new ShufflePairing();
 	}
 }

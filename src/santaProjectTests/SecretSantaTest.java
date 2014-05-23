@@ -17,7 +17,7 @@ import org.junit.Test;
 import santaProject.ISecretSanta;
 import santaProject.SecretSantaFactory;
 
-public class SimplePairingTest {
+public class SecretSantaTest {
 	ISecretSanta simplePairing;
 
 	final String[] participants = new String[] { "Kyle", "Kenny", "Eric",

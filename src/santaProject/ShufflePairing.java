@@ -2,9 +2,7 @@ package santaProject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * @author ASHISH KARKI_
@@ -12,9 +10,6 @@ import java.util.List;
  *              current participant). Uses Java's Collection.shuffle method.
  */
 public class ShufflePairing implements ISecretSanta {
-
-	ShufflePairing() {
-	}
 
 	@Override
 	public String[] generateAssignments(String[] participants) {
@@ -24,19 +19,28 @@ public class ShufflePairing implements ISecretSanta {
 		String[] assignments = new String[n];
 
 		// Create ArrayList copy of participants for easy manipulation
-		ArrayList<String> participantsList = new ArrayList<String>(
+		ArrayList<String> assignmentsList = new ArrayList<String>(
 				Arrays.asList(participants));
-		ArrayList<String> assignmentsList = (ArrayList<String>) participantsList
-				.clone();
 
+		int assigneeIndex = -1;
+		
+		/*
+		 * During each loop, we shuffle the assignmentsList, choose member 0 as
+		 * our assignee. If it is the same person, just move the assignee index
+		 * to 1.
+		 */
 		for (int i = 0; i < participants.length; i++) {
 			Collections.shuffle(assignmentsList);
 
-			assignments[i] = assignmentsList.get(0);
-			// if its the same person, move the index by one
-			if (participants[i].equals(assignments[0])) {
-				assignments[i] = assignmentsList.get(1);
+			assigneeIndex = 0;
+			// If its the same person, move the index by one
+			if (participants[i].equals(assignmentsList.get(assigneeIndex))) {
+				assigneeIndex++;
 			}
+			assignments[i] = assignmentsList.get(assigneeIndex);
+
+			// Remove the new assignee from assignments arraylist
+			assignmentsList.remove(assigneeIndex);
 		}
 
 		return assignments;
