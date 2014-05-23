@@ -13,6 +13,7 @@ Implementation
     + The participants and their assignees are unique. 
     + It also logically follows that all the assignments are from the list of passed participants.
 5. A factory class called <b>SecretSantaFactory</b> is also defined. This class has a static factory method that is responsible for creating and returning one of the Secret Santa concrete classes. Using such design has the advantage of choosing any specific implementation as per requirement. The JUnit test class also utilizes this factory method to test the current implementation.
+6. 6. Finally, the class "SecretSantaDemo" contains main method and uses our factory to choose and run a particular algorithm.
 <br>
 
 Unit Testing
