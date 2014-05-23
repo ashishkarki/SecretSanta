@@ -10,7 +10,8 @@ import java.util.Random;
  * @Description Follows Simple Pairing wherein each participant has been chosen
  *              one assignment/giftee based on randomization. Follows a check to
  *              ensure no LOGICAL_ERROR occur (i) no any (participant =
- *              assignment) (ii) there is no left or right shift of names
+ *              assignment) (ii) The participants and their assignees are unique
+ *              pair.
  */
 public class SimplePairing implements ISecretSanta {
 
@@ -36,12 +37,11 @@ public class SimplePairing implements ISecretSanta {
 		List<Integer> alreadyPaired = new ArrayList<Integer>();
 
 		for (int i = 0; i < n; i++) {
-			// gifteeIndex = randomNoGenerator.nextInt(n);
 
 			// Check for LOGICAL_ERROR conditions
 			// 1. A person is not assigned to him/herself
 			// 2. The participants and their assignees are unique pair
-			
+
 			do {
 				gifteeIndex = randomNoGenerator.nextInt(n);
 			} while (gifteeIndex == i || alreadyPaired.contains(gifteeIndex));

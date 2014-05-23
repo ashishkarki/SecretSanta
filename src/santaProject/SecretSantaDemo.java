@@ -3,7 +3,7 @@ package santaProject;
 /**
  * @author ASHISH KARKI_
  * 
- * @Description Controls access to one of the implementations and display result
+ * @Description Controls access to one of the implementations and displays result
  */
 public class SecretSantaDemo {
 
@@ -26,6 +26,10 @@ public class SecretSantaDemo {
 		printArray(assignments);
 	}
 
+	/**
+	 * @param array
+	 *            : array to be printed
+	 */
 	public static void printArray(String[] array) {
 		System.out.println("The resulting assignment is:");
 		for (String element : array) {

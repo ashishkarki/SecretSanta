@@ -1,7 +1,11 @@
 package santaProjectTests;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
+
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -63,7 +67,7 @@ public class SimplePairingTest {
 		final String[] assignments = simplePairing
 				.generateAssignments(participants);
 		printArray(assignments);
-		
+
 		// Shift the whole participants array to its left and check
 		String[] leftRotatedAssignments = rotateLeft(participants.clone());
 
@@ -75,6 +79,24 @@ public class SimplePairingTest {
 
 		assertThat("Shiting names right is not acceptable solution.",
 				assignments, not(rightRotatedAssignments));
+	}
+
+	/**
+	 * This checks that no two assignments are the same person.
+	 */
+	@Test
+	public void testAssignmentsAreUnique() {
+		final String[] assignments = simplePairing
+				.generateAssignments(participants);
+		printArray(assignments);
+
+		// Assume there may be duplicate elements, put them in a Set
+		Set<String> assignmentsSet = new LinkedHashSet<String>(
+				Arrays.asList(assignments));
+
+		// If these two are still same, then all elements are still unique
+		Assert.assertArrayEquals("All assignment have to be unique.",
+				assignments, assignmentsSet.toArray());
 	}
 
 	/**
@@ -107,10 +129,15 @@ public class SimplePairingTest {
 		return arrayToRotateRight;
 	}
 
+	/**
+	 * @param array
+	 *            : array to be printed out using for loop
+	 */
 	public static void printArray(String[] array) {
 		System.out.println("The resulting assignment is:");
 		for (String element : array) {
 			System.out.print(element + ", ");
 		}
+		System.out.println("\n********************************");
 	}
 }
