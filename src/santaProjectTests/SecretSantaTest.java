@@ -49,11 +49,7 @@ public class SecretSantaTest {
 		final String[] assignments = simplePairing
 				.generateAssignments(participants);
 		printArray(assignments);
-		/*
-		 * for (int i = 0; i < participants.length; i++) {
-		 * assertFalse("The participant must be different than assignee.",
-		 * participants[i].equals(assignments[i])); }
-		 */
+
 		assertThat("The participant must be different than assignee.",
 				participants, not(assignments));
 	}
