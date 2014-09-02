@@ -24,3 +24,4 @@ Unit Testing
     + The assignments are not simple left or right rotation of the participants.
     + All assignments are unique, that is, no two assignees are the same.
 
+9/02/2014 Added this line as a testing of using EGIT plugin in Eclipse Luna. (#Cerner #DevAcademy)
